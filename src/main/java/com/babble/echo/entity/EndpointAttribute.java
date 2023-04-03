@@ -1,10 +1,10 @@
 package com.babble.echo.entity;
 
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.io.Serializable;
 
 
 @Getter
@@ -20,6 +20,12 @@ public class EndpointAttribute implements Serializable {
     @Column(name = "id")
     @JsonIgnore
     private Long id;
+
+    public EndpointAttribute(String verb, String path, EndpointAttributeResponse response) {
+        this.verb = verb;
+        this.path = path;
+        this.response = response;
+    }
 
     private String verb;
     private String path;

@@ -1,9 +1,8 @@
 package com.babble.echo.entity;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.*;
 
 import java.io.Serializable;
@@ -23,6 +22,11 @@ public class Endpoint implements Serializable {
 
     private String type;
 
+    public Endpoint(String type, EndpointAttribute attributes) {
+        this.type = type;
+        this.attributes = attributes;
+    }
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "attribute_id", referencedColumnName = "id")
     private EndpointAttribute attributes;
@@ -31,7 +35,7 @@ public class Endpoint implements Serializable {
         if(this.getType() == null || this.getAttributes() == null || this.getAttributes().getPath() == null ||
         this.getAttributes().getVerb() == null || this.getAttributes().getResponse() == null ||
                 this.getAttributes().getResponse().getBody() == null ||
-                this.getAttributes().getResponse().getCode() == null){
+                this.getAttributes().getResponse().getCode() == null || this.getAttributes().getPath().startsWith("/endpoint")){
             return false;
         }
         return true;

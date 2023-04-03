@@ -1,16 +1,12 @@
 package com.babble.echo.service.implementation;
 
 import com.babble.echo.entity.Endpoint;
+import com.babble.echo.exception.InvalidRequestBody;
+import com.babble.echo.exception.NoRecordFound;
 import com.babble.echo.repository.EndpointRepository;
 import com.babble.echo.service.EndpointService;
-import com.sun.jdi.request.InvalidRequestStateException;
-import jakarta.persistence.EntityNotFoundException;
-import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +19,10 @@ public class EndpointServiceImpl implements EndpointService {
 
     @Override
     public Endpoint save(Endpoint newEndpoint) {
+        Endpoint existingEndpoint = repository.findByAttributes_Verb_AndAttributes_Path(newEndpoint.getAttributes().getVerb(), newEndpoint.getAttributes().getPath());
+        if(existingEndpoint != null){
+            return existingEndpoint;
+        }
         return repository.save(newEndpoint);
     }
 
@@ -44,7 +44,7 @@ public class EndpointServiceImpl implements EndpointService {
     public Endpoint patch(Long id, Endpoint newEndpoint) throws Exception {
         Optional<Endpoint> endpoint =  repository.findById(id);
         if(!endpoint.isPresent()){
-            throw new EntityNotFoundException();
+            throw new NoRecordFound();
         }else{
             try{
                 if(newEndpoint.getAttributes().getPath() != null){endpoint.get().getAttributes().setPath(newEndpoint.getAttributes().getPath());}
@@ -55,7 +55,7 @@ public class EndpointServiceImpl implements EndpointService {
                 Endpoint endpointResponse = repository.save(endpoint.get());
                 return endpointResponse;
             }catch(Exception e) {
-                throw new InvalidRequestStateException();
+                throw new InvalidRequestBody();
             }
         }
     }

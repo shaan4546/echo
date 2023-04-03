@@ -21,6 +21,12 @@ public class EndpointAttributeResponse  implements Serializable {
     @JsonIgnore
     private Long id;
 
+    public EndpointAttributeResponse(Integer code, Map<String, String> headers, String body) {
+        this.code = code;
+        this.headers = headers;
+        this.body = body;
+    }
+
     private Integer code;
 
     @ElementCollection

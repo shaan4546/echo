@@ -1,6 +1,5 @@
 package com.babble.echo.repository;
 
-import com.babble.echo.entity.Endpoint;
 import com.babble.echo.entity.EndpointAttribute;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
