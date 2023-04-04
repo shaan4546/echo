@@ -7,6 +7,7 @@ import lombok.*;
 import java.io.Serializable;
 import java.util.Map;
 
+@ToString
 @Getter
 @Setter
 @NoArgsConstructor

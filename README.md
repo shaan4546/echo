@@ -164,7 +164,7 @@ This is an example of how to use the application once its up and running.
 
 #### Request
 
-    > curl -u admin:admin --location --request PATCH 'http://localhost:8080/endpoints/1' --header 'Content-Type: application/json' --data-raw '{ "id": 1, "type": "endpoints", "attributes": { "verb": "POST", "path": "/greetings", "response": { "code": 201, "headers": {}, "body": "\"{ \"message\": \"Hello, everyone\" }\"" } } }'
+    curl -u admin:admin --location --request PATCH 'http://localhost:8080/endpoints/1' --header 'Content-Type: application/json' --data-raw '{ "id": 1, "type": "endpoints", "attributes": { "verb": "POST", "path": "/greetings", "response": { "code": 201, "headers": {}, "body": "\"{ \"message\": \"Hello, everyone\" }\"" } } }'
 
 
 #### Expected response
@@ -194,7 +194,7 @@ This is an example of how to use the application once its up and running.
 
 #### Request
 
-     > curl -u admin:admin --location --request DELETE 'http://localhost:8080/endpoints/1'
+     curl -u admin:admin --location --request DELETE 'http://localhost:8080/endpoints/1'
 
 #### Expected response
 
@@ -209,7 +209,7 @@ In case client makes unexpected response or server encountered an internal probl
 
 #### Request
 
-    > curl -u admin:admin --location --request DELETE 'http://localhost:8080/endpoints/1234567890'
+    curl -u admin:admin --location --request DELETE 'http://localhost:8080/endpoints/1234567890'
 
 #### Expected response
 
@@ -257,7 +257,7 @@ In case client makes unexpected response or server encountered an internal probl
 
 #### 1. Client requests non-existing path
 
-    > curl --location --request GET 'http://localhost:8080/hello'
+    curl --location --request GET 'http://localhost:8080/hello'
 
     HTTP/1.1 404 Not found
     Content-Type: application/json
@@ -273,7 +273,7 @@ In case client makes unexpected response or server encountered an internal probl
 
 #### 2. Client creates an endpoint
 
-    > curl -u admin:admin --location --request POST 'http://localhost:8080/endpoints' --header 'Content-Type: application/json' --data-raw '{ "type": "endpoints", "attributes": { "verb": "GET", "path": "/hello", "response": { "code": 200, "headers": {"Content-Type": "application/json"}, "body": "\"{ \"message\": \"Hello, world\" }\"" } } }'
+    curl -u admin:admin --location --request POST 'http://localhost:8080/endpoints' --header 'Content-Type: application/json' --data-raw '{ "type": "endpoints", "attributes": { "verb": "GET", "path": "/hello", "response": { "code": 200, "headers": {"Content-Type": "application/json"}, "body": "\"{ \"message\": \"Hello, world\" }\"" } } }'
 
     HTTP/1.1 201 Created
     Content-Type: application/json
@@ -297,7 +297,7 @@ In case client makes unexpected response or server encountered an internal probl
 
 #### 3. Client requests the recently created endpoint
 
-    > curl --location --request GET 'http://localhost:8080/hello'
+    curl --location --request GET 'http://localhost:8080/hello'
 
     HTTP/1.1 200 OK
     Content-Type: application/json
