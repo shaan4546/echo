@@ -16,6 +16,9 @@
     </li>
     <li>
       <a href="#usage">Usage</a>
+      <ul>
+        <li><a href="#examples">Examples</a></li>
+      </ul>
     </li>
   </ol>
 </details>
@@ -24,7 +27,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-* *Echo* or *server* is a project to *mock endpoint*. The main purpose of Echo is to serve ephemeral/mock endpoints created with parameters specified by clients
+* *Echo* or *server* is a spring boot java project to *mock endpoint* with docker support. The main purpose of Echo is to serve ephemeral/mock endpoints created with parameters specified by clients
 * *Endpoints API*: a set of endpoints (`GET|POST|PATCH|DELETE /endpoints{/:id}`) designated to manage mock endpoints served by Echo.
 
 
@@ -40,7 +43,7 @@ To get a local copy up and running follow these simple example steps.
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
-* docker
+* Docker
   ```sh
   https://docs.docker.com/desktop/install/mac-install/
   ```
@@ -64,7 +67,7 @@ To see test coverage of the app, follow the below instructions.
    ```sh
    docker build -t echo --target test .
    ```
-2. Run docker image with with echo as tag and exposed port as 8080
+2. Run docker image with echo as tag and exposed port as 8080
    ```sh
    docker run -p 8080:8080 -t echo 
    ```
@@ -90,8 +93,7 @@ This is an example of how to use the application once its up and running.
 
 ### Examples
 
-All endpoint APIs are secured by http basic auth. User need to give username and password (admin & admin) configured in application.properties file for accessing the APIs.
-
+*All endpoint APIs are secured by http basic auth. User need to give username and password (admin & admin) configured in application.properties file for accessing the APIs.*
 
 <details>
   <summary>Create endpoint</summary>
@@ -99,7 +101,7 @@ All endpoint APIs are secured by http basic auth. User need to give username and
 
 #### Request
 
-    > curl -u admin:admin --location --request POST 'http://localhost:8080/endpoints' --header 'Content-Type: application/json' --data-raw '{ "type": "endpoints", "attributes": { "verb": "GET", "path": "/greetings", "response": { "code": 200, "headers": {"Content-Type": "application/json"}, "body": "\"{ \"message\": \"Hello, world\" }\"" } } }'
+    curl -u admin:admin --location --request POST 'http://localhost:8080/endpoints' --header 'Content-Type: application/json' --data-raw '{ "type": "endpoints", "attributes": { "verb": "GET", "path": "/greetings", "response": { "code": 200, "headers": {"Content-Type": "application/json"}, "body": "\"{ \"message\": \"Hello, world\" }\"" } } }'
 
 #### Expected response
 
@@ -224,6 +226,30 @@ In case client makes unexpected response or server encountered an internal probl
     }
   </markdown>
 </details>
+
+<details>
+  <summary>Unauthorised access to endpoint API</summary>
+  <markdown>
+
+#### Request
+
+    curl  --location --request GET 'http://localhost:8080/endpoints'
+
+
+#### Expected response
+
+    HTTP/1.1 410 Unauthorized
+    Content-Type: application/json
+
+    {
+      "timestamp": "2023-04-04T12:02:47.051+00:00",
+      "status": 401,
+      "error": "Unauthorized",
+      "path": "/endpoints"
+    }
+  </markdown>
+</details>
+
 
 <details open>
   <summary>Sample scenario</summary>
