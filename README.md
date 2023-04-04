@@ -27,8 +27,8 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-* *Echo* or *server* is a spring boot java project to *mock endpoint* with docker support. The main purpose of Echo is to serve ephemeral/mock endpoints created with parameters specified by clients
-* *Endpoints API*: a set of endpoints (`GET|POST|PATCH|DELETE /endpoints{/:id}`) designated to manage mock endpoints served by Echo.
+* *Echo* or *server* is a **spring boot java project** to *mock endpoint* with **docker support**. The main purpose of Echo is to serve ephemeral/mock endpoints created with parameters specified by clients
+* *Endpoints API*: a set of **secured** endpoints (`GET|POST|PATCH|DELETE /endpoints{/:id}`) designated to manage mock endpoints served by Echo.
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
