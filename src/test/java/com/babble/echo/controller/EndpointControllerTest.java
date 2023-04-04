@@ -46,7 +46,7 @@ class EndpointControllerTest {
 
         assertAll(
                 () -> assertNotNull(actualEndpoint),
-                () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
+                () -> assertEquals(HttpStatus.CREATED, response.getStatusCode()),
                 () -> assertEquals(givenEndpoint, actualEndpoint)
         );
     }
@@ -81,7 +81,7 @@ class EndpointControllerTest {
 
         assertAll(
                 () -> assertNotNull(actualEndpoint),
-                () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
+                () -> assertEquals(HttpStatus.CREATED, response.getStatusCode()),
                 () -> assertEquals(givenEndpoint.getId(), actualEndpoint.getId())
         );
     }

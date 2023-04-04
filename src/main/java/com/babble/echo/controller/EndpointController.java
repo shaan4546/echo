@@ -27,7 +27,7 @@ class EndpointController {
         if(!newEndpoint.validate()){
             return new ResponseEntity(RequestHandle.handleInvalidRequest(), HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<Object>(endpointService.save(newEndpoint), HttpStatus.OK);
+        return new ResponseEntity<Object>(endpointService.save(newEndpoint), HttpStatus.CREATED);
     }
 
     @GetMapping()
